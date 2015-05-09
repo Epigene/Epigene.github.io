@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Setting up FISH shell
+title: Rails 4 Use concern namespaces
 ---
 # Use Module namespaces to keep your models skinny and DRY
 
