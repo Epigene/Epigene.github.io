@@ -2,7 +2,7 @@
 layout: post
 title: Rails 4 Use concern namespaces
 ---
-# Use Module namespaces to keep your models skinny and DRY
+#### Use Module namespaces to keep your models skinny and DRY
 
 1. Set up your rails 4 app to load subfolders of /app/models/concerns
 
