@@ -2,8 +2,6 @@
 layout: post
 title: Rails 4 Use concern namespaces
 ---
-#### Use Module namespaces to keep your models skinny and DRY
-
 1. Set up your rails 4 app to load subfolders of /app/models/concerns
 
 ```ruby
@@ -15,8 +13,10 @@ end
 
 2. Set up subfolders.
 Say you have a `User` model and you want to refacture validations into a module for it.
-  `mkdir /app/models/concerns/user`
-  `touch /app/models/concerns/user/validations.rb`
+
+`mkdir /app/models/concerns/user`
+
+`touch /app/models/concerns/user/validations.rb`
 
 3. Require this module in User model definition
 
