@@ -4,7 +4,7 @@ title: Use WickedPDF to make PDFs in Rails
 ---
 ##### Setup
 
-1 Add these two gems to the gemfile
+###### 1 Add these two gems to the gemfile
 
   ```ruby
   # PDFs
@@ -12,7 +12,7 @@ title: Use WickedPDF to make PDFs in Rails
   gem 'wkhtmltopdf-installer', github: 'vovayartsev/wkhtmltopdf-installer-ruby', branch: 'master'
   ```
 
-2 Make an init file and load the `wkhtmltopdf` binary path
+###### 2 Make an init file and load the `wkhtmltopdf` binary path
 
   ```ruby
   require 'wkhtmltopdf_installer'
@@ -21,7 +21,7 @@ title: Use WickedPDF to make PDFs in Rails
 
 ##### Usage
 
-1 Make a controller
+###### 1 Make a controller
 
   ```ruby
   class PdfController < ApplicationController
@@ -49,7 +49,7 @@ title: Use WickedPDF to make PDFs in Rails
   end
   ```
 
-2 Make views that will be PDF friendly
+###### 2 Make views that will be PDF friendly
 
   ```ruby
   # views/pdf/index.slim
@@ -62,7 +62,7 @@ title: Use WickedPDF to make PDFs in Rails
         = pdf.som_attribute
   ```
 
-3 Read more
+###### 3 Read more
 
 Options you can pass WickedPDF are in their [readme](https://github.com/mileszs/wicked_pdf)
 
