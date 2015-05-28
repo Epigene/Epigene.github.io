@@ -68,4 +68,6 @@ Options you can pass WickedPDF are in their [readme](https://github.com/mileszs/
 
 Inserting page breaks is discussed [here](http://stackoverflow.com/questions/5806943/rails-wickedpdf-page-breaks)
 
+Using custom fonts [here](https://shellycloud.com/blog/2014/01/generating-pdfs-with-custom-fonts-using-wkhtmltopdf)
+
 ![pdf.png]({{ site.baseurl }}/images/pdf.png)
