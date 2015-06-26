@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Setting up FISH shell
+title: Setting up FISH shell on Mac OSX
 ---
 0. set up sublime for terminal:
 

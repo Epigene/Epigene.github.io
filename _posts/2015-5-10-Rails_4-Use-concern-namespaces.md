@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Rails 4 Use concern namespaces
+title: Rails4: Use concern namespaces
 ---
-1. Set up your rails 4 app to load subfolders of /app/models/concerns
+#### 1. Set up your rails 4 app to load subfolders of /app/models/concerns
 
 ```ruby
 # /config/application.rb
@@ -11,19 +11,20 @@ class Application < Rails::Application
 end
 ```
 
-2. Set up subfolders.
+#### 2. Set up subfolders.
 Say you have a `User` model and you want to refacture validations into a module for it.
 
-`mkdir /app/models/concerns/user`
-
-`touch /app/models/concerns/user/validations.rb`
+```
+mkdir /app/models/concerns/user
+touch /app/models/concerns/user/validations.rb
+```
 
 3. Require this module in User model definition
 
 ```ruby
 # /app/models/user.rb
 
-require_dependency 'order/validate' # this may be necessary if dependency breakage occurs
+require_dependency 'user/validations' # this may be necessary if dependency breakage occurs
 class User < ActiveRecord::Base
   include User::Validations
 end
@@ -36,11 +37,9 @@ class User < ActiveRecord::Base
   module Validations
     extend ActiveSupport::Concern
 
-    validates :email, uniqueness: {message: "Email already taken!"}, presence: {message: "Email must be present!"}
-    validates_format_of :email, with: /\A.*?\@.*?\Z/i, message: "Weird email"
-
     included do
-      # do stuff
+      validates :email, uniqueness: {message: "Email already taken!"}, presence: {message: "Email must be present!"}
+      validates_format_of :email, with: /\A.*?\@.*?\Z/i, message: "Weird email"
     end
 
     module ClassMethods
@@ -49,7 +48,7 @@ class User < ActiveRecord::Base
       end
     end
 
-    def some_user_instance_method
+    def some_instance_method
       # code
     end
   end
