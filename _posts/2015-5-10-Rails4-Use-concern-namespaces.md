@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rails4: Use concern namespaces"
+title: Rails4 Use concern namespaces
 ---
 
 #### 1 Set up your rails 4 app to load subfolders of /app/models/concerns
