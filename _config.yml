@@ -30,7 +30,7 @@ footer-links:
   stackoverflow: users/3319298/epigene
 
 # Your disqus shortname, entering this will enable commenting on posts
-disqus: @disqus_2z8fO9FoDW
+disqus:
 
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
 google_analytics:
