@@ -3,7 +3,7 @@ layout: post
 title: Initialize Rails App
 ---
 
-```shell
+```
 # Replace <project> with _myapp_ and you are good to go.
 
 # Make new gemset, use latest ruby
