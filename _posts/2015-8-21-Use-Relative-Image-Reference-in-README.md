@@ -7,4 +7,4 @@ Seperate asset branch to the rescue!
 
 "![your_mage](/../assets/relative/path/to/img.jpg?raw=true "Optional Title")"
 
-![method_missing.jpg]({{ site.baseurl }}/images/method_missing.jpg)
+![your_mage](/../assets/cookies.jpg?raw=true "Cookies")
