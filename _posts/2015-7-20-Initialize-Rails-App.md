@@ -1,30 +1,20 @@
 ---
 layout: post
-title: Use Method Missing
+title: Initialize Rails App
 ---
-```ruby
-@@method_missing_regex = /^is_(.*)\?$/
 
-def method_missing(method_sym, *arguments, &block)
-  # the first argument is a Symbol, so you need to_s it if you want to pattern match
-  if method_sym.to_s[@@method_missing_regex]
-    # If the method missing matches the pattern, you can access the capture group with $1
-    # for example @object.is_badass? #=> "badass"
-    puts $1
-  else
-    super
-  end
-end
-
-def self.respond_to?(method_sym, include_private = false)
-  if method_sym.to_s[@@method_missing_regex]
-    true
-  else
-    super
-  end
-end
 ```
+# Replace <project> with _myapp_ and you are good to go.
 
-[Reference](http://technicalpickles.com/posts/using-method_missing-and-respond_to-to-create-dynamic-methods/)
+# Make new gemset, use latest ruby
+$ rvm install 2.2.2
+$ rvm use 2.2.2@<project> --create
+$ gem install bundler
+$ gem install rails
 
-![method_missing.jpg]({{ site.baseurl }}/images/method_missing.jpg)
+# Init rails app
+$ mkdir <project>
+$ cd <project>
+$ git init
+$ rails new . --git --database=postgresql --skip-bundle
+```
