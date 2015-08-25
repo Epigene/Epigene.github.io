@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
     included do
       validates :email, uniqueness: {message: "Email already taken!"}, presence: {message: "Email must be present!"}
-      validates_format_of :email, with: /\A.*?\@.*?\Z/i, message: "Weird email"
+      scope :expires_on, ->(date) { where(expiration_date: date.to_date.beginning_of_day..date.to_date.end_of_day) }
     end
 
     module ClassMethods
