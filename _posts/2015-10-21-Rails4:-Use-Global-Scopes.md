@@ -2,9 +2,10 @@
 layout: post
 title: Use Global Scopes
 ---
-Say you want all your models to have a scope that lets you select them by date of their created_at.
+Say you want all your models to have a scope that lets you select them by date of their `created_at`.
 
 1. Make a module right under `/models/concerns/global_scopes.rb`
+
 ```ruby
 module GlobalScopes
   extend ActiveSupport::Concern
@@ -16,12 +17,12 @@ module GlobalScopes
 end
 ```
 
-2. Have this module extend Activerecord::Base. Put in an initializer.
+2. Have this module extend `Activerecord::Base`. Put in an initializer.
+
 ```ruby
 ActiveRecord::Base.class_eval do
   include GlobalScopes
 end
-
 ```
 
 ![Global]({{ site.baseurl }}/images/global.png)
