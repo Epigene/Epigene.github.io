@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-Hi, I am a Rails developer at Creative Mobile.
+Hi, I am a Rails developer at Creative.
 
 ### Likes
 
@@ -12,4 +12,4 @@ Hi, I am a Rails developer at Creative Mobile.
 
 ### Contact me
 
-[augusts@creo.mobi](mailto:augusts@creo.mobi)
+[augusts@creative.gs](mailto:augusts@creative.gs)
