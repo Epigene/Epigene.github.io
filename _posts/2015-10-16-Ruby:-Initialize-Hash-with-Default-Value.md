@@ -22,8 +22,8 @@ default_hash #=> {1 => "odd!"} # saved
 ```
 
 More at:
-[fun with ruby hashes](https://netinlet.com/blog/2014/01/01/fun-with-ruby-hashes/)
-[algorithmic fun with ruby hashes](http://www.sitepoint.com/algorithmic-fun-ruby-hashes/)
-[solving antipatterns](http://www.sitepoint.com/how-to-solve-coding-anti-patterns-for-ruby-rookies/)
+[fun with ruby hashes](https://netinlet.com/blog/2014/01/01/fun-with-ruby-hashes/)  
+[algorithmic fun with ruby hashes](http://www.sitepoint.com/algorithmic-fun-ruby-hashes/)  
+[solving antipatterns](http://www.sitepoint.com/how-to-solve-coding-anti-patterns-for-ruby-rookies/)  
 
 ![Hash]({{ site.baseurl }}/images/hash.jpg)
