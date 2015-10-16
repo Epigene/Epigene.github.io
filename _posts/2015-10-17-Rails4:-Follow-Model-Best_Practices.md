@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   enum gender: { female: 0, male: 1 }
 
   # followed by association macros
-  belongs_to :country
+  belongs_to :country, required: true # also validates parent presence
 
   has_many :authentications, dependent: :destroy
 
