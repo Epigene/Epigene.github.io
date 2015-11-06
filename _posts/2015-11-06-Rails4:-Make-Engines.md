@@ -130,6 +130,7 @@ end
 ```
 
 Usage
+
 ```ruby
 Myengine.configure do |config|
   config.some_attribute = "peaches"
