@@ -2,7 +2,7 @@
 layout: post
 title: Make Engines
 ---
-In [previous post]({{ site.baseurl }}/rubygems.png) I discuessed ruby gem creation.  
+In [previous post]({{ site.baseurl }}/Ruby:-Make-Gems-with-Bundler/) I discuessed ruby gem creation.  
 In this post I will expound on creation of Rails engines - a variant of ruby gem that assumes inclusion in a rails app and, usually, provides functionality through models/controllers.
 Assumptions: Namespaced, RSpec+FactoryGirl, Postgres (atl east in dev), Automagic migrations.  
 
@@ -39,11 +39,19 @@ $ rails g rspec:install
 ```ruby
 # in /spec/rails_helper.rb
 
-# remove
+# Replace default test app location with the custom one
+#default
 require File.expand_path('../../config/environment', __FILE__)
-
-# add
+# replace with this
 require File.expand_path("../../spec/dummy/config/environment", __FILE__)
+
+# Require development stuff
+require 'pry'
+require 'factory_girl'
+
+# Load factories
+ENGINE_RAILS_ROOT=File.join(File.dirname(__FILE__), '../')
+Dir[File.join(ENGINE_RAILS_ROOT, "spec/factories/**/*.rb")].each {|f| require f }
 ```
 
 ```ruby
@@ -59,13 +67,6 @@ module Myengine
     end
   end
 end
-```
-
-Require development stuff
-```ruby
-# in spec/rails_helper.rb
-require 'pry'
-require 'factory_girl'
 ```
 
 ```

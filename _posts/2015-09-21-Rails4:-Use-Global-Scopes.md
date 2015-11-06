@@ -26,6 +26,6 @@ end
 ActiveRecord::Base.send(:include, GlobalScopes)
 ```
 
-More at [github](http://stackoverflow.com/a/32710395/3319298)
+More at [stackoverflow](http://stackoverflow.com/a/32710395/3319298)
 
 ![Global]({{ site.baseurl }}/images/global.png)
