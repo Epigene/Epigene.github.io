@@ -26,9 +26,9 @@ class User < ActiveRecord::Base
   enum gender: { female: 0, male: 1 }
 
   # followed by association macros
-  belongs_to :country, required: true # also validates parent presence
+  belongs_to :club, required: true # also validates parent presence
 
-  has_many :authentications, dependent: :destroy
+  has_many :toys, dependent: :destroy, foreign_key: "child_id", class_name: "ToyCar"
 
   # and validation macros  
   validates :password, format: { with: /\A\S{8,128}\z/, allow_nil: true }
