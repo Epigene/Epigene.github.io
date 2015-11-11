@@ -77,14 +77,24 @@ $ rake db:create db:migrate RAILS_ENV=test
 $ rspec
 ```
 
-### 4. Handle automagic migrations
+### 4.1 Handle migrations manually
+Do nothing, just provision engine users run
+
+```
+$ rake myengine:install:migrations
+```
+
+This will copy migrations from your engine /db to main app's
+
+### 4.2 Handle automagic migrations
+#### Warning, plays poorly with production and other engines with different migration managamanet schemes
 
 ```ruby
 # in /lib/myengine/engine.rb via https://blog.pivotal.io/labs/labs/leave-your-migrations-in-your-rails-engines
 
 module Myengine
   class Engine < ::Rails::Engine
-    isolate_namespace DevelopmentMail
+    isolate_namespace MyEngine
 
     initializer :append_migrations do |app|
       unless app.root.to_s == root.to_s
