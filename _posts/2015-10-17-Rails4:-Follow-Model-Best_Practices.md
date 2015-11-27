@@ -47,6 +47,10 @@ class User < ActiveRecord::Base
   scope :adult, -> { where("age > ?", 17) }
   scope :named, ->(first_name) { where(name: first_name) }
 
+  # and add law of demeter conserving delegations
+  delegate :id, :name to: :case, allow_nil: true, prefix: "buddy" #=> .buddy_id
+  delegate :gifts, to: :friend, prefix: false #=> .gifts
+
   # add methods below
 end
 ```
