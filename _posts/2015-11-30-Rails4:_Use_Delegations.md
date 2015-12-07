@@ -2,27 +2,29 @@
 layout: post
 title: Use Delegations
 ---
-You want to keep track of your app's load times.  
-[Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler) is excellent for this.
-
-Basic setup is super easy.  
-
-### 1. Add the gem and bundle
+Recently I received a link to an [opinionated blog post](https://medium.com/@gioch/design-patterns-law-of-demeter-with-rails-49a44a9689fe) about how to observe the law of demeter in Rails. It strongly suggests using delegations in Rails models, and here is the TL;DR of how you do it. This has also been added to the [rails guidelines post](http://epigene.github.io/Rails4:_Follow_Model_Best_Practices).
 
 ```ruby
-gem 'rack-mini-profiler'
-```
-
-### 2. for production
-Add to `application_controller.rb`
-
-```ruby
-before_action do
-  # change `current_admin.present?` to any check method you like
-  if current_admin.present?
-    Rack::MiniProfiler.authorize_request
-  end
+class User < ActiveRecord::Base
+  # law of demeter conserving delegations
+  delegate :id, :name to: :case, allow_nil: true, prefix: "buddy" #=> .buddy_id
+  delegate :gifts, to: :friend, prefix: false #=> .gifts
 end
 ```
 
-![mini profiler]({{ site.baseurl }}/images/mini_profiler.png)
+These two delegation lines add three methods to User instances
+
+```ruby
+@user.buddy_id # calls @user.case.id, returns nil if no associated case is found
+@user.buddy_name # calls @user.case.name, returns nil if no associated case is found
+```
+
+@user.gifts # calls @user.friend.gifts, throws an error if no associated friend
+As a rule of thumb, you want to define delegations for these scenarios:
+
+```ruby
+@model.belongs_to_association.attribute
+@model.has_one_association.attribute
+```
+
+![mini profiler]({{ site.baseurl }}/images/delegate.png)
