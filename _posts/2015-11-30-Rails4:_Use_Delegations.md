@@ -17,9 +17,9 @@ These two delegation lines add three methods to User instances
 ```ruby
 @user.buddy_id # calls @user.case.id, returns nil if no associated case is found
 @user.buddy_name # calls @user.case.name, returns nil if no associated case is found
+@user.gifts # calls @user.friend.gifts, throws an error if no associated friend
 ```
 
-@user.gifts # calls @user.friend.gifts, throws an error if no associated friend
 As a rule of thumb, you want to define delegations for these scenarios:
 
 ```ruby
