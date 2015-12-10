@@ -43,6 +43,14 @@ end
 
 # add to .rspec
 --format documentation
+--require spec_helper
+
+# add requires to spec_helper.rb
+require 'simplecov'
+SimpleCov.start
+...
+require 'timecop'
+require 'pry'
 
 # Run spec
 $ rspec spec/tests/foo_spec.rb
