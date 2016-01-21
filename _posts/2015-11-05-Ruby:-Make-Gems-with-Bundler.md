@@ -15,7 +15,9 @@ $ bundle gem <gemname>
 ### 2. Fill out \<gemname\>.gemspec, especially descriptions
 
 ```ruby  
-spec.date          = Date.today.to_s
+# Only with ruby 2.0.x
+spec.required_ruby_version = '>= 2'
+spec.date                  = Date.today.to_s
 ```
 
 ### 3. Setup dev and runtime dependencies in \<gemname\>.gemspec file, RSpec for example
