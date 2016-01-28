@@ -14,7 +14,7 @@ group :production, :staging do
 end
 ```
 
-### 2. Get clean newrelic.yml from website
+### 2. Get a clean newrelic.yml from website
 
 Given account main view at https://rpm.newrelic.com/accounts/123,  
 your yml should be at https://rpm.newrelic.com/accounts/123/newrelic.yml  
