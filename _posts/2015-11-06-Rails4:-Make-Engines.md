@@ -166,6 +166,16 @@ Myengine.config.some_attribute = "candy"
 Myengine.config.some_attribute #=> "candy"
 ```
 
+### 7. Give your engine a shorthand namespace
+
+```
+# in /myengine/lib/myengine.rb
+
+# ... add as last lines
+ME = Myengine # now you can use ME::SomeModel instead of Myengine::SomeModel
+```
+
+
 
 ## Local Development
 
