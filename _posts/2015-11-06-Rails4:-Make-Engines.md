@@ -9,34 +9,61 @@ Assumptions: Namespaced, RSpec+FactoryGirl, Postgres (at least in dev).
 ### 1. Init engine project
 
 ```
-$ rvm install ruby-<version>  e.g. $ rvm install ruby-2.2.3
-$ rvm use 2.2.3@<gemset> --create
-$ gem install bundler
-$ gem install rails
-$ mkdir ~/code/myengine
-$ cd ~/code/myengine
-$ rails plugin new . --mountable --dummy-path=spec/dummy -T --skip-bundle --database=postgresql
+# rvm install ruby-<version>
+rvm install ruby-2.2.3
+
+# rvm use 2.2.3@<gemset> --create
+rvm use 2.2.3@myengine --create
+
+gem install bundler
+
+# gem install rails -v <version>
+gem install rails -v 4.1.0
+
+# make a directory that matches your intended engine name
+mkdir ~/code/myengine
+cd ~/code/myengine
+
+# run the opinionated initializer, will use spec/dummy for test app and Postgres database
+rails plugin new . --mountable --dummy-path=spec/dummy -T --skip-bundle --database=postgresql
 ```
 
 ### 2. Edit myengine.gemspec, add dependencies
 
 ```ruby
+  s.required_ruby_version = '>= 2'
+
+  # ...
+
   s.add_dependency "rails", "~> 4.1.0"
-  s.add_dependency "pg", "~> 0.18.4"
+
+  s.add_development_dependency "rake", "~> 10.5.0"  
+  s.add_development_dependency "pg", ">= 0.18.4"
 
   s.add_development_dependency "pry"
-  s.add_development_dependency "rspec-rails"
-  s.add_development_dependency 'factory_girl_rails'
+  s.add_development_dependency "rspec-rails", "~> 3.4.1"
+  s.add_development_dependency 'factory_girl_rails', "~> 4.7.0"
+  s.add_development_dependency 'timecop', "~> 0.8.1"
+  s.add_development_dependency "spring-commands-rspec", "~> 1.0.4"
+
+```
+
+Bundle!
+```
+bundle
 ```
 
 ### 3. Set up RSpec
 
 ```
 # run the generator
-$ rails g rspec:install
+rails g rspec:install
 
-# add to .rspec
+# make .rspec
+
 --format documentation
+--require rails_helper
+--color
 ```
 
 ```ruby
@@ -51,6 +78,7 @@ require File.expand_path("../../spec/dummy/config/environment", __FILE__)
 # Require development stuff
 require 'pry'
 require 'factory_girl'
+require 'timecop'
 
 # Load factories
 ENGINE_RAILS_ROOT=File.join(File.dirname(__FILE__), '../')
@@ -62,7 +90,7 @@ Dir[File.join(ENGINE_RAILS_ROOT, "spec/factories/**/*.rb")].each {|f| require f 
 
 module Myengine
   class Engine < ::Rails::Engine
-    isolate_namespace DevelopmentMail
+    isolate_namespace Myengine
 
     config.generators do |g|
       g.test_framework :rspec
@@ -76,8 +104,12 @@ end
 # Prepare database
 $ rake db:create db:migrate RAILS_ENV=test
 
+# set up spring
+# in /myapp/config/spring.rb
+Spring.application_root = "#{File.expand_path(__FILE__)}/../../spec/dummy"
+
 # test functionality
-$ rspec
+$ spring rspec
 ```
 
 ### 4 Handle migrations
