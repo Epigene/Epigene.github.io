@@ -76,6 +76,7 @@ require File.expand_path('../../config/environment', __FILE__)
 require File.expand_path("../../spec/dummy/config/environment", __FILE__)
 
 # Require development stuff
+require 'myengine' # the engine itself, lol
 require 'pry'
 require 'factory_girl'
 require 'timecop'

@@ -25,10 +25,11 @@ class User < ActiveRecord::Base
   # enums
   enum gender: { female: 0, male: 1 }
 
-  # followed by association macros
-  belongs_to :club, required: true # also validates parent presence
+  # followed by association macros  
+  belongs_to :club, class_name: GemNamespace::ModelName, foreign_key: 'gem_namespace_model_name_id' # the docs say required: true should work, but it throws an error, use a simple validation on association (not just _id) instead
+  validates :club, presence: true
 
-  has_many :toys, dependent: :destroy, foreign_key: "child_id", class_name: "ToyCar"
+  has_many :toys, dependent: :destroy, class_name: "ToyCar", foreign_key: "child_id"
 
   # and validation macros  
   validates :password, format: { with: /\A\S{8,128}\z/, allow_nil: true }
