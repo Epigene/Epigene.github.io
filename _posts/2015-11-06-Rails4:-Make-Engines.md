@@ -3,8 +3,8 @@ layout: post
 title: Make Engines
 ---
 In [previous post]({{ site.baseurl }}/Ruby:-Make-Gems-with-Bundler/) I discuessed ruby gem creation.  
-In this post I will expound on creation of Rails engines - a variant of ruby gem that assumes inclusion in a rails app and, usually, provides functionality through models/controllers.
-Assumptions: Namespaced, RSpec+FactoryGirl, Postgres (atl east in dev), Automagic migrations.  
+In this post I will expound on creation of Rails engines - a variant of ruby gem that assumes inclusion in a rails app and, usually, provides functionality through models/controllers.  
+Assumptions: Namespaced, RSpec+FactoryGirl, Postgres (at least in dev).  
 
 ### 1. Init engine project
 
@@ -21,6 +21,9 @@ $ rails plugin new . --mountable --dummy-path=spec/dummy -T --skip-bundle --data
 ### 2. Edit myengine.gemspec, add dependencies
 
 ```ruby
+  s.add_dependency "rails", "~> 4.1.0"
+  s.add_dependency "pg", "~> 0.18.4"
+
   s.add_development_dependency "pry"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency 'factory_girl_rails'
@@ -77,35 +80,14 @@ $ rake db:create db:migrate RAILS_ENV=test
 $ rspec
 ```
 
-### 4.1 Handle migrations manually
-Do nothing, just provision engine users run
+### 4 Handle migrations
+Ensure engine users run
 
 ```
 $ rake myengine:install:migrations
-```
 
-This will copy migrations from your engine /db to main app's
-
-### 4.2 Handle automagic migrations
-#### Warning, plays poorly with production and other engines with different migration managamanet schemes
-
-```ruby
-# in /lib/myengine/engine.rb via https://blog.pivotal.io/labs/labs/leave-your-migrations-in-your-rails-engines
-
-module Myengine
-  class Engine < ::Rails::Engine
-    isolate_namespace MyEngine
-
-    initializer :append_migrations do |app|
-      unless app.root.to_s == root.to_s
-        config.paths["db/migrate"].expanded.each do |expanded_path|
-          app.config.paths["db/migrate"] << expanded_path
-        end
-      end
-    end
-
-  end
-end
+# or the get-all version
+$ rake railties:install:migrations
 ```
 
 ### 5. Set git remote using `git remote add origin <url>`
@@ -153,8 +135,19 @@ Myengine.config.some_attribute #=> "candy"
 ```
 
 
-## Notes
-You should clone the engine in `engines/myengine` and use this line in gemfile for quick development
+## Local Development
+
+1. Get the gem locally (you probably have it if you are the developer)
+
+2. In main app, make some folder for linked engines, for example `/engines`
+
+3. Link the local gem into engines
+
+```
+sudo ln -Ffs ~/path/to/myengine ~/path/to/main_app/engine/myengine
+```
+
+4. Configure gemfile to use the local version
 
 ```ruby
 gem 'myengine', path: 'engines/myengine'

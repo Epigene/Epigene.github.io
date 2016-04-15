@@ -69,6 +69,49 @@ Consult [Rspec docs](https://www.relishapp.com/rspec/rspec-rails/docs/controller
 
 ## Testing controller modules
 
+### 1. Use Anonymous Controller
+
+```ruby
+RSpec.describe Namespace::SomeControllerModule, type: :controller do
+  controller(CreativeSubscriptions::ApplicationController) do # here the passed argument can be omitted if inheritance is simple
+    include Namespace::SomeControllerModule
+
+    def custom_action
+      render :text => "custom called"
+    end
+  end
+
+  describe "GET :custom_action" do
+    let(:route) { routes.draw { get "custom" => "creative_subscriptions/application#custom" } }    
+
+    it "should work" do
+      route
+      get :custom_action
+      expect(response.body).to eq "custom called"
+      expect(response.status).to eq 200
+    end
+  end
+
+  # describe "#catch_flash_message" do
+  #   it "should set flash from get params :flash_info and :flash_notice" do
+  #     subject.params = {flash_info: "info", flash_notice: "notice"}
+  #     subject.send(:catch_flash_message)
+  #     expect(flash[:info]).to eq "info"
+  #     expect(flash[:notice]).to eq "notice"
+  #   end
+  # end
+  #
+  # describe "#set_locale_to_lv" do
+  #   it "should set I18n to :lv" do
+  #     subject.send(:set_locale_to_lv)
+  #     expect(I18n.locale).to eq :lv
+  #   end
+  # end  
+
+end
+
+```
+
 
 
 Consult [Pivotal Labs' post](https://blog.pivotal.io/labs/labs/testing-modules-that-get-included-in-a-controller)
