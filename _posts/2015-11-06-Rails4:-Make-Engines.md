@@ -77,13 +77,31 @@ require File.expand_path("../../spec/dummy/config/environment", __FILE__)
 
 # Require development stuff
 require 'myengine' # the engine itself, lol
+require 'rspec/rails' # very importnt, explicity require all rspec goodies like config block and controller helpers
 require 'pry'
 require 'factory_girl'
 require 'timecop'
 
-# Load factories
-ENGINE_RAILS_ROOT=File.join(File.dirname(__FILE__), '../')
-Dir[File.join(ENGINE_RAILS_ROOT, "spec/factories/**/*.rb")].each {|f| require f }
+# Define engine root
+ENGINE_ROOT = File.expand_path("..", File.dirname(__FILE__))
+require "#{ENGINE_ROOT}/spec/dummy/config/environment"
+
+# load factories (using root)
+Dir[File.join(ENGINE_ROOT, "spec/factories/**/*.rb")].each {|f| require f }
+
+
+RSpec.configure do |config|
+  config.expect_with :rspec do |expectations|
+    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+
+  config.mock_with :rspec do |mocks|
+    mocks.verify_partial_doubles = true
+  end
+
+  config.infer_base_class_for_anonymous_controllers = true
+  config.infer_spec_type_from_file_location!
+end
 ```
 
 ```ruby
@@ -96,6 +114,9 @@ module Myengine
     config.generators do |g|
       g.test_framework :rspec
       g.integration_tool :rspec
+      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+      g.assets false
+      g.helper false
     end
   end
 end
