@@ -27,9 +27,16 @@ class User < ActiveRecord::Base
 
   # followed by association macros  
   belongs_to :club, class_name: GemNamespace::ModelName, foreign_key: 'gem_namespace_model_name_id' # the docs say required: true should work, but it throws an error, use a simple validation on association (not just _id) instead
-  validates :club, presence: true
-
+  # validates :club, :gem_namespace_model_name_id, presence: true # put this in validations!
   has_many :toys, dependent: :destroy, class_name: "ToyCar", foreign_key: "child_id"
+
+  # and add law of demeter conserving delegations
+  delegate :id, :name to: :case, allow_nil: true, prefix: "buddy" #=> .buddy_id
+  delegate :gifts, to: :friend, prefix: false #=> .gifts
+
+  # alias attributes (even associations) to more convenient names
+  alias_attribute :car, :vehicle
+  alias_attribute :consultant, :admin_user
 
   # and validation macros  
   validates :password, format: { with: /\A\S{8,128}\z/, allow_nil: true }
@@ -48,14 +55,19 @@ class User < ActiveRecord::Base
   scope :adult, -> { where("age > ?", 17) }
   scope :named, ->(first_name) { where(name: first_name) }
 
-  # and add law of demeter conserving delegations
-  delegate :id, :name to: :case, allow_nil: true, prefix: "buddy" #=> .buddy_id
-  delegate :gifts, to: :friend, prefix: false #=> .gifts
-
   # add methods below
+  def self.class_method
+
+  end
+
+  def instance_method
+
+  end
 end
 ```
 
 More at [Rails style guide](https://github.com/bbatsov/rails-style-guide)  
+
+__EDIT__: (2016-04-22) Moved delegation and aliasing blocks higher, above validations
 
 ![Hash]({{ site.baseurl }}/images/clean_guidelines.png)
