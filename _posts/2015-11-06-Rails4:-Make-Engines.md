@@ -73,7 +73,7 @@ rails g rspec:install
 #default
 require File.expand_path('../../config/environment', __FILE__)
 # replace with this
-require File.expand_path("../../spec/dummy/config/environment", __FILE__)
+require File.expand_path("../dummy/config/environment", __FILE__)
 
 # Require development stuff
 require 'myengine' # the engine itself, lol
