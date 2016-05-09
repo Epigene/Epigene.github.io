@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Initialize Rails App
+title: Rails: Initialize App in 2016
 ---
 ```
 # Replace <project> with _myapp_ and you are good to go.
@@ -9,7 +9,7 @@ title: Initialize Rails App
 $ rvm install 2.2.2
 $ rvm use 2.2.2@<project> --create
 $ gem install bundler
-$ gem install rails
+$ gem install rails -v 5.0.0.beta4
 
 # Init rails app
 $ mkdir <project>
