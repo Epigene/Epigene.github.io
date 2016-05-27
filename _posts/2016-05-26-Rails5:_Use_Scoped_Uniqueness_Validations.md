@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Rails5: Use Scoped Uniqueness Validations
+title: Rails5 | Use Scoped Uniqueness Validations
 ---
 # Rails5: Use Scoped Uniqueness Validations
 
