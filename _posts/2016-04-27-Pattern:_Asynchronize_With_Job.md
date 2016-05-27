@@ -2,6 +2,8 @@
 layout: post
 title: Pattern: Asynchronize With Job
 ---
+# Pattern: Asynchronize With Job
+
 Sometimes Ruby code takes too long for web standarts, or there is some heavy processing.  
 A pattern I use (and have trouble remembering) is to write code in a modular way.  
 Consider this:
@@ -90,9 +92,8 @@ end
 
 Naturally, for jobs to work you will need a job handler like Sidekiq or Resque set up for your app, but that is a topic for another post.  
 Assuming you can run jobs, to test in development you need to open the console in one terminal tab, and run the do-all development worker via `rake resque:work QUEUE='*'`
-Call `User.make_everyone_work_out` and you should see console output telling you that jobs were enqueued, and in worker tab you should see output about them being performed.
+Call `User.make_everyone_work_out` and you should see console output telling you that jobs were enqueued, and in worker tab you should see output about them being performed.  
 
-
-Hooray, no more synchronious holdups!
+Hooray, no more synchronious holdups!  
 
 ![job]({{ site.baseurl }}/images/job.jpg)

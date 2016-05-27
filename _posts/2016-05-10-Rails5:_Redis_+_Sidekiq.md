@@ -2,6 +2,8 @@
 layout: post
 title: Rails5: Redis + Sidekiq
 ---
+# Rails5: Redis + Sidekiq
+
 Here is my workflow for setting up sidekiq as the background job processing adapter for Rails5.  
 
 ### 1. Include the gem

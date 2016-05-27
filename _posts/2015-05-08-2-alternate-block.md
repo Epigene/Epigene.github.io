@@ -2,6 +2,7 @@
 layout: post
 title: Ruby block variants
 ---
+# Ruby block variants
 Ruby blocks come in two variants
 
 ```ruby

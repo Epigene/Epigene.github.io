@@ -2,6 +2,7 @@
 layout: post
 title: Download sounds from Google Translate
 ---
+# Download sounds from Google Translate
 
 Sometimes I need a robotic voice saying things.
 A quick and easy way to get a sound file with the pronunciation of virtually any text is by using Google Translate's text-to-speech API.
