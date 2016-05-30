@@ -30,6 +30,17 @@ Add a compound uniqueness index in migration.
 
 # e.g.
 add_index :admin_events, [:origin_id, :origin_app, :origin_type], unique: true
+
+# NB, sometimes these compound indice names can get too long, use
+add_index :admin_events, [:origin_id, :origin_app, :origin_type], unique: true, name: "idx_admin_event_origin_origin_app_origin_type"
+
+# The logic would be:
+
+# index becomes idx
+# singular table name
+# no joining words
+# no _id
+# alphabetical order
 ```
 
 ### 2. App Level
