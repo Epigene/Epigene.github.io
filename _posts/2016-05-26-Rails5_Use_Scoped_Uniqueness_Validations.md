@@ -1,9 +1,7 @@
 ---
 layout: post
-title: Rails5 | Use Scoped Uniqueness Validations
+title: (Rails5) Use Scoped Uniqueness Validations
 ---
-# Rails5: Use Scoped Uniqueness Validations
-
 Consider this: we have an aggregation app, that receives data from other apps.  
 
 ```ruby

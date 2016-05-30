@@ -1,9 +1,7 @@
 ---
 layout: post
-title: Pattern: Asynchronize With Job
+title: (Pattern) Asynchronize With Job
 ---
-# Pattern: Asynchronize With Job
-
 Sometimes Ruby code takes too long for web standarts, or there is some heavy processing.  
 A pattern I use (and have trouble remembering) is to write code in a modular way.  
 Consider this:

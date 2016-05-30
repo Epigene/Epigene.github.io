@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Rails: Initialize App in 2016
+title: (Rails) Initialize App in 2016
 ---
+
 ```
 # Replace <project> with _myapp_ and you are good to go.
 

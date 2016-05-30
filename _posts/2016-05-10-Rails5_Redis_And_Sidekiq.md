@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Rails5: Redis + Sidekiq
+title: (Rails5) Redis and Sidekiq
 ---
 Here is my workflow for setting up sidekiq as the background job processing adapter for Rails5.  
 
