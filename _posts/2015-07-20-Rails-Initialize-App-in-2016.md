@@ -10,7 +10,7 @@ title: (Rails) Initialize App in 2016
 $ rvm install 2.2.2
 $ rvm use 2.2.2@<project> --create
 $ gem install bundler
-$ gem install rails -v 5.0.0.beta4
+$ gem install rails -v 5.0.0.rc1
 
 # Init rails app
 $ mkdir <project>
