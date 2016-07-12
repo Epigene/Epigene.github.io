@@ -2,7 +2,6 @@
 layout: post
 title: Arguments in rake task
 ---
-# Arguments in rake task
 
 #### Method 1, environmental variables
 ```ruby
