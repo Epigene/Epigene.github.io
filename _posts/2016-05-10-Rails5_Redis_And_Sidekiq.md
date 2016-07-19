@@ -7,7 +7,8 @@ Here is my workflow for setting up sidekiq as the background job processing adap
 ### 1. Include the gem
 
 ```ruby
-gem 'sidekiq', "~> 4.1.2"
+gem 'sidekiq', '~> 4.1.4'  # the hard-hitting background worker
+gem 'sinatra', '~> 1.4.7', require: false # for sidekiq's web UI
 ```
 
 ### 2. Set :sidekiq as ActiveJob adapter
@@ -71,7 +72,22 @@ Rails.application.routes.draw do
 end
 ```
 
-### 4. Generate a job
+### 4.0 Prepare Job inheritance
+Rails5 defines a `ApplicationJob` class that acts as an abstract parent class for all your jobs.  
+
+```rb
+class ApplicationJob < ActiveJob::Base
+end
+```
+
+Then have your jobs inherit from it to have shared logic.  
+
+```rb
+class TestJob < ApplicationJob
+end
+```
+
+### 4.1 Generate a job
 
 ```
 rails generate job Example
@@ -80,7 +96,7 @@ rails generate job Example
 ### 5. populate to job's perform method
 
 ```ruby
-class ExampleJob < ActiveJob::Base
+class ExampleJob < ApplicationJob
   # Set the Queue as Default
   queue_as :default
 
@@ -95,9 +111,13 @@ end
 
 ```ruby
 ExampleJob.perform_later(args)
+
+# or change queue on the fly
+ExampleJob.set(queue: :another_queue).perform_later(args)
 ```
 
 ### 7. Run the worker
+
 #### Locally
 
 ```
@@ -111,9 +131,10 @@ bundle exec sidekiq -e development
 worker: bundle exec sidekiq -c 10 -q priority -q default
 ```
 
-There's more at [wiki](https://github.com/mperham/sidekiq/wiki/Advanced-Options)
+There's more about running Sidekiq at [wiki](https://github.com/mperham/sidekiq/wiki/Advanced-Options)
 
 ### 7. Troubleshooting
-Consult [the wiki](https://github.com/mperham/sidekiq/wiki/Active+Job)
+Consult Sidekiq [wiki](https://github.com/mperham/sidekiq/wiki/Active+Job)
+See also Rails ActiveJob [documentation](http://guides.rubyonrails.org/active_job_basics.html)
 
 ![job]({{ site.baseurl }}/images/sq.png)
