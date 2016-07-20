@@ -24,31 +24,36 @@ end
 ### 3. Configure redis
 
 ```ruby
-# in config/initializers/sidekiq.rb
+# in config/initializers/redis.rb
 
 # Configuration
-raise "Expected environment to contain REDIS_URL, but it does not!" if !(Rails.env.development? || Rails.env.test?) && ENV["REDIS_URL"].blank?
+redis = Hash.new{|h, k| h[k] = Hash.new(url: ENV["REDIS_URL"].presence || "redis://localhost:6379")}
 
-redis = Hash.new{|h, k| h[k] = Hash.new(config: {url: ENV["REDIS_URL"], port: URI.parse(ENV["REDIS_URL"]).port}) }
-redis["development"] = {config: {url: "redis://localhost:6390"}, port: "6390"}
-redis["test"] = {config: {url: "redis://localhost:6391"}, port: "6391"}
+# redis["production"] = {url: ENV["REDIS_URL"].presence || "redis://localhost:6390"}
+# redis["staging"] = {url: ENV["REDIS_URL"].presence || "redis://localhost:6390"}
+redis["development"] = {url: "redis://localhost:6390"}
+redis["test"] = {url: "redis://localhost:6391"}
+
+# Parse the env-specific url
+uri = URI.parse(redis.dig(Rails.env, :url))
 
 # Boot local redis in dev
 if Rails.env.development? || Rails.env.test?
-  system("redis-server --port #{redis.dig(Rails.env, :port)} --daemonize yes")
+  system("redis-server --port #{uri.port} --daemonize yes")
   raise "Couldn't start redis" if $?.exitstatus != 0
 end
 
-# Uses the hash to configure server and client
-Sidekiq.configure_server do |config|
-  #config.redis = { url: 'redis://redis.example.com:7372/12' }
-  config.redis = redis.dig(Rails.env, :config)
-end
+# Initialize application-wide constant.
+REDIS = Redis.new(url: uri.to_s, port: uri.port).freeze
+puts ">> Initialized REDIS with #{REDIS.inspect}"
+```
 
-Sidekiq.configure_client do |config|
-  #config.redis = { url: 'redis://redis.example.com:7372/12' }
-  config.redis = redis.dig(Rails.env, :config)
-end
+### 4. Configure sidekiq
+
+```ruby
+# in config/initializers/sidekiq.rb
+
+# Depends on redis.rb having run and initialized REDIS constant.
 
 # WEB UI
 require 'sidekiq'
@@ -58,21 +63,19 @@ Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
   [user, password] == ["creomobi", "cre@tive:)"]
 end
 
-REDIS = Redis.new(url: redis.dig(Rails.env, :config, :url), port: redis.dig(Rails.env, :config, :port))
-puts ">> Initialized REDIS with #{REDIS.inspect}"
-```
+redis_url = URI.parse(URI::extract(REDIS.inspect).first).to_s
+config_hash = {url: redis_url}
 
-### 4. Add the Web UI route
+Sidekiq.configure_server do |config|
+  config.redis = config_hash
+end
 
-```ruby
-require 'sidekiq/web'
-
-Rails.application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq'
+Sidekiq.configure_client do |config|
+  config.redis = config_hash
 end
 ```
 
-### 4.0 Prepare Job inheritance
+### 5.0 Prepare Job inheritance
 Rails5 defines a `ApplicationJob` class that acts as an abstract parent class for all your jobs.  
 
 ```rb
@@ -87,13 +90,13 @@ class TestJob < ApplicationJob
 end
 ```
 
-### 4.1 Generate a job
+### 5.1 Generate a job
 
 ```
 rails generate job Example
 ```
 
-### 5. populate to job's perform method
+### 6. populate to job's perform method
 
 ```ruby
 class ExampleJob < ApplicationJob
@@ -107,7 +110,7 @@ class ExampleJob < ApplicationJob
 end
 ```
 
-### 6. Enqueue the job!
+### 7. Enqueue the job!
 
 ```ruby
 ExampleJob.perform_later(args)
@@ -116,7 +119,7 @@ ExampleJob.perform_later(args)
 ExampleJob.set(queue: :another_queue).perform_later(args)
 ```
 
-### 7. Run the worker
+### 8. Run the worker
 
 #### Locally
 
@@ -133,7 +136,7 @@ worker: bundle exec sidekiq -c 10 -q priority -q default
 
 There's more about running Sidekiq at [wiki](https://github.com/mperham/sidekiq/wiki/Advanced-Options)
 
-### 7. Troubleshooting
+### 9. Troubleshooting
 Consult Sidekiq [wiki](https://github.com/mperham/sidekiq/wiki/Active+Job)
 See also Rails ActiveJob [documentation](http://guides.rubyonrails.org/active_job_basics.html)
 
