@@ -7,14 +7,14 @@ Macs tend to be expensive, especially for tinkering around.
 Enter Linux in Virtualbox!  
 
 #### Pros
-1. Free! Turn that Windows gaming rig into respectable development workstation with open source tools.
+1. Free! Turn that Windows gaming rig into a respectable development workstation with open source tools.
 
 #### Cons
 1. You will be using Linux, you better know what you are doing...
 2. Can be a pain to set up.  
 
 #### Difficulty and Time
-Difficulty: Medium - lots of tools and environments involved, but mainly configuration problemsolving
+Difficulty: Medium - lots of tools and environments involved, but mainly configuration problemsolving.  
 Time: A good long afternoon.
 
 ## 1. The Windows Host
@@ -22,10 +22,10 @@ I had a Windows7 with 8gb RAM and spare 12GB of disk space.
 Dedicated 5gb of the ram to the virtual Linux and all works well.  
 
 ### 1-1 Install Virtualbox  
-Head over to [Oracle homepage](https://www.virtualbox.org/).
-Grab:
-1. VirtualBox <version> for Windows hosts
-2. The extension pack
+Head over to [Oracle homepage](https://www.virtualbox.org/).  
+Grab:  
+  1. VirtualBox <version> for Windows hosts 
+  2. The extension pack  
 
 Install.
 
