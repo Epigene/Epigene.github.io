@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(Rails5) Commandline Options"
+title: (Rails5) Commandline Options
 ---
 Recently I wanted to set up a quick Rails test app, to show people how to get from zero to the Rails' "Hello World" view, and how adding new content works.  
 
