@@ -2,7 +2,6 @@
 layout: post
 title: Ruby block variants
 ---
-# Ruby block variants
 Ruby blocks come in two variants
 
 ```ruby
@@ -10,7 +9,9 @@ Ruby blocks come in two variants
 ```
 
 ```ruby
-do |vars| #code end
+do |vars|
+  #code
+end
 ```
 
 Once you realize that these are both equivalent blocks, you can do either

@@ -1,8 +1,7 @@
 ---
 layout: post
-title: Deep nested queries in Activerecord
+title: Deep nested queries in ActiveRecord
 ---
-
 Contributed the backend of a statistics panel today.  
 
 ![rake.jpg]({{ site.baseurl }}/images/statistics_panel.png)

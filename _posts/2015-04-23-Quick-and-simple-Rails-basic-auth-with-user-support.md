@@ -2,7 +2,6 @@
 layout: post
 title: Quick and simple Rails basic-auth with user support
 ---
-# Quick and simple Rails basic-auth with user support
 
 #### 1. Create a User model
 

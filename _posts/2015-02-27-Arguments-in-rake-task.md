@@ -2,6 +2,7 @@
 layout: post
 title: Arguments in rake task
 ---
+There are three ways to do this.  
 
 #### Method 1, environmental variables
 ```ruby
