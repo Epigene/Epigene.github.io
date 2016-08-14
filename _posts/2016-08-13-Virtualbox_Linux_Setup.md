@@ -184,6 +184,27 @@ ALTER USER <your username> WITH SUPERUSER;
 \q
 ```
 
+### Development DNS
+Accessing local webapps via localhost or IP is cumbersome and does not represent production environment.
+
+We will set up `*.dev` TLD for development needs.
+
+This will be a two-step process.  
+First we will muck with hosts to redirect all requests to .dev to the localhost 127.0.0.1 IP address.
+Second, we will reconfigure the IP table to redirect requests to 127.0.0.1:80 to 127.0.0.1:3000.  
+This will produce the effect that a server started with `rails s -b 127.0.0.1 -p 3000` will be accessible at http://<anything>.dev
+
+#### Change Hosts
+Consult [this discussion](http://askubuntu.com/a/233209/254615) for insight.
+
+#### Change IP table
+
+```
+sudo iptables -t nat -A OUTPUT -p tcp --dport 80 -d 127.0.0.1 -j DNAT --to-destination 127.0.0.1:3000
+```
+
+See (http://serverfault.com/a/54371/294240)[this discussion]() for insight.
+
 ## 3. The Tools
 ### 3-1 The Editor
 Go with what you like and are familiar with.  
@@ -192,7 +213,7 @@ I like and am familiar with GitHub's [Atom](https://atom.io/).
 ## 4. First App
 By now it should be possible to get to Rails' "Hello World" screen of a new app.  
 
-### 4-1 Set Up Ruby
+#### 4-1 Set Up Ruby
 
 ```
 $ rvm install ruby-2.3.1
@@ -204,7 +225,7 @@ $ gem install bundler
 $ gem install rails
 ```
 
-### 4-2 Set Up a Rails Project With Git
+#### 4-2 Set Up a Rails Project With Git
 
 ```
 $ mkdir ~/Projects/first-app
@@ -215,3 +236,39 @@ $ git init
 
 $ rails new . -BMCT --database=postgresql --skip-keeps --skip-turbolinks
 ```
+
+#### 4-3 Configure DB
+
+```
+# in /config/database.yml
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: first-app
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  database: first-app_test
+
+production:
+  <<: *default
+```
+
+```
+$ rails db:create db:migrate
+```
+
+#### Run The Server
+
+```
+$ rails s -b 127.0.0.1 -p 3000
+```
+
+The app should be reachable at http://local.dev
+
+Yayifications!
