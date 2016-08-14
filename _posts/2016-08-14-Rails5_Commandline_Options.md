@@ -13,6 +13,9 @@ Here's a review of command line options available in Rails5 and what they could 
 ```
 ➜ rails -v
 Rails 5.0.0.1
+```
+
+```
 ➜ rails
 Usage:
   rails new APP_PATH [options]
@@ -44,7 +47,9 @@ Options:
       [--rc=RC]                                          # Path to file containing extra configuration options for rails command
       [--no-rc], [--no-no-rc]                            # Skip loading of extra configuration options from .railsrc file
       [--api], [--no-api]                                # Preconfigure smaller stack for API only apps
+```
 
+```
 Runtime options:
   -f, [--force]                    # Overwrite files that already exist
   -p, [--pretend], [--no-pretend]  # Run but do not make any changes
@@ -74,6 +79,7 @@ Example:
 We will be focusing on the "Options" part.
 
 ## Discussion
+
 #### `-d, [--database=DATABASE]`
 One of core options. I hear `--database=postgresql` is popular.
 
