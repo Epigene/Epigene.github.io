@@ -186,6 +186,53 @@ ALTER USER <your username> WITH SUPERUSER;
 \q
 ```
 
+### Redis
+
+#### Install deps
+```
+sudo apt-get update
+```
+```
+sudo apt-get install -y build-essential tcl8.5
+```
+#### Get code
+```
+wget http://download.redis.io/releases/redis-stable.tar.gz
+```
+unrar
+```
+tar xzf redis-stable.tar.gz
+```
+
+```
+cd redis-stable
+```
+#### Build from source
+```
+make
+
+sudo make install
+```
+
+#### Setup deamon
+```
+cd utils
+```
+
+```
+sudo ./install_server.sh # the default 6379 port is fine for development
+```
+
+#### Test
+```
+redis-cli
+```
+```
+> ping
+```
+
+Blatantly stolen from [my gist](https://gist.github.com/Epigene/f5e63e30ab7f9680e5f4).  
+
 ### Development DNS
 Accessing local webapps via localhost or IP is cumbersome and does not represent production environment.
 
