@@ -69,5 +69,10 @@ $ git remote add origin https://github.com/Epigene/gemname.git
 
 ### 7. Once everything is TDDed, bump the version and `rake relase`
 
+### 8. Troubleshooting
+
+Sometimes `rake release` will hang.  
+Do a `gem push` first to get rubygems creditentials set up.  
+
 
 ![Rubygems]({{ site.baseurl }}/images/rubygems.png)
