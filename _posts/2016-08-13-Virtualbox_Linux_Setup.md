@@ -116,7 +116,7 @@ Configure:
 ### Misc Packages
 
 ```
-sudo apt-get install nodejs
+sudo apt-get install nodejs libxslt-dev libxml2-dev
 ```
 
 ### Keys
