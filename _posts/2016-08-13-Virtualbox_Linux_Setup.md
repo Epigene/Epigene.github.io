@@ -322,3 +322,7 @@ $ rails s -b 127.0.0.1 -p 3000
 The app should be reachable at http://local.dev
 
 Yayifications!
+
+## Troubleshooting
+### My VM dis is too small!
+Resize following [this video](https://www.youtube.com/watch?v=ikSIDI535L0)
