@@ -324,5 +324,14 @@ The app should be reachable at http://local.dev
 Yayifications!
 
 ## Troubleshooting
-### My VM dis is too small!
+### My VM disc is too small!
 Resize following [this video](https://www.youtube.com/watch?v=ikSIDI535L0)
+Then fix the swap fstab by:
+
+```
+# 1. Output available partitions
+$ sudo blkid
+
+# 2. Edit fstab and change swap UUID to correct one
+$ sudo -H nano /etc/fstab
+```
