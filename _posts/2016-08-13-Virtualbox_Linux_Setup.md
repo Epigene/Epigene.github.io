@@ -177,10 +177,9 @@ $ sudo apt-get install postgresql-common postgresql postgresql-contrib libpq-dev
 $ sudo -u postgres createuser <your username>
 
 # If you would like to set a password for the user, you can do the following
-sudo -u postgres psql
-\password <your username>
+sudo -u postgres psql postgres
 
-# Give create priviledges to user
+ALTER USER <your username> PASSWORD '<pass>';
 ALTER USER <your username> CREATEDB;
 ALTER USER <your username> WITH SUPERUSER;
 \q
