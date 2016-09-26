@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   alias_attribute :consultant, :admin_user
 
   # and validation macros  
-  validates :password, format: { with: /\A\S{8,128}\z/, allow_nil: true }
+  validates :password, format: { with: /\A\S{8,128}\z/, allow_nil: true, message: :weak_password }
   validate  :dat_custom_validation
 
   # next we have callbacks
