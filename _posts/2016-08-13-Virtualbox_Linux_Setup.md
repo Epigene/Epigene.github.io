@@ -129,6 +129,7 @@ Start by consulting the [in-depth thread](http://askubuntu.com/questions/254424/
 Here's a key symbol [reference](http://wiki.linuxquestions.org/wiki/List_of_Keysyms_Recognised_by_Xmodmap).  
 
 #### Examples
+
 ##### Tilde/grave to Del
 
 ```
@@ -138,6 +139,7 @@ Here's a key symbol [reference](http://wiki.linuxquestions.org/wiki/List_of_Keys
 xmodmap -e "keycode 119 = Delete Delete"
 xmodmap -e "keycode 49 = grave asciitilde"
 ```
+
 ##### Caps to Enter
 
 ```
@@ -145,17 +147,19 @@ xmodmap -e "keycode 66 = Return" -e 'clear Lock'
 ```
 
 #### Persist changes over boots
+Sourcing the ~/.Xmodmap file is a known hassle.  
+Perhaps the least problematic way is to define an alias and have it execute on terminal launch.  
 
 ```
 # 1. run keymap export command after making changes
 xmodmap -pke > ~/.Xmodmap
 
-# 2. make a init file which will source the file
+# 2. (probably will not work) make a init file which will source the file
 touch ~/.xinitrc
   xmodmap ~/.Xmodmap
-```
 
-3. You may need to trigger the lock removal on every boot, boot level override (via Upstart) works poorly, just place it in fish config.
+# 3. You may need to trigger the lock removal on every boot, boot level override (via Upstart) works poorly, just place it in fish config.
+```
 
 ### RVM
 
@@ -199,51 +203,46 @@ ALTER USER <your username> WITH SUPERUSER;
 ### Redis
 
 #### Install deps
+
 ```
 sudo apt-get update
 ```
+
 ```
 sudo apt-get install -y build-essential tcl8.5
 ```
-#### Get code
+
+#### Get code and install
+
 ```
 wget http://download.redis.io/releases/redis-stable.tar.gz
-```
-unrar
-```
+
 tar xzf redis-stable.tar.gz
-```
 
-```
 cd redis-stable
-```
-#### Build from source
-```
 make
-
 sudo make install
 ```
 
 #### Setup deamon
-```
-cd utils
-```
 
 ```
+cd utils
 sudo ./install_server.sh # the default 6379 port is fine for development
 ```
 
 #### Test
+
 ```
 redis-cli
-```
-```
+
 > ping
 ```
 
 Blatantly stolen from [my gist](https://gist.github.com/Epigene/f5e63e30ab7f9680e5f4).  
 
 ### Development DNS
+
 Accessing local webapps via localhost or IP is cumbersome and does not represent production environment.
 
 We will set up `*.dev` TLD for development needs.
@@ -254,6 +253,7 @@ Second, we will reconfigure the IP table to redirect requests to 127.0.0.1:80 to
 This will produce the effect that a server started with `rails s -b 127.0.0.1 -p 3000` will be accessible at `http://<anything>.dev`
 
 #### Change Hosts
+
 Consult [this discussion](http://askubuntu.com/a/233209/254615) for insight.
 
 #### Change IP table
@@ -334,6 +334,7 @@ The app should be reachable at http://local.dev
 Yayifications!
 
 ## Troubleshooting
+
 ### My VM disc is too small!
 Resize following [this video](https://www.youtube.com/watch?v=ikSIDI535L0)
 Then fix the swap fstab by:
