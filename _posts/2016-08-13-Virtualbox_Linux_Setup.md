@@ -44,7 +44,7 @@ Unmount the install image after setup and reboot the VM.
 Open the Terminal with Ctrl+Alt+T  
 
 ```
-sudo apt-get install virtualbox-guest-dkms virtualbox-guest-utils
+sudo apt-get install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
 ```
 
 Reboot VM, increase resolution to native and go Fullscreen mode with RCtrl+F
