@@ -51,17 +51,18 @@ Reboot VM, increase resolution to native and go Fullscreen mode with RCtrl+F
 
 ## 2. The Linux Guest
 
+### 2-0 Library Setup
+Vanilla Lubuntu is missing several key libs web developers will need, run this command
+
+```
+sudo apt-get install -y fish curl git tilda fonts-dejavu nodejs libxslt-dev libxml2-dev
+```
+
 ### 2-1 Terminal and Shell
 I use Fish shell.  
 Tilda allows for nice customization.
 
 #### 2-1-1 Fish Setup
-
-Install Fish shell
-
-```
-$ sudo apt-get install fish
-```
 
 Install Oh-My-Fish
 
