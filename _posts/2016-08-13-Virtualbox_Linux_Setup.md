@@ -192,6 +192,10 @@ $ echo "rvm default" >> ~/.config/fish/config.fish
 
 # Verify
 $ rvm --version
+
+# Disable gem documentation
+# Make a file ~/.gemrc and put this in it:
+$ gem: --no-rdoc --no-ri 
 ```
 
 ### Postgres
