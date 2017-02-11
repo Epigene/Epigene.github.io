@@ -64,6 +64,17 @@ Tilda allows for nice customization.
 
 #### 2-1-1 Fish Setup
 
+Install Fish shell from official repo ([original thread](https://hackercodex.com/guide/install-fish-shell-mac-ubuntu/))
+
+```
+sudo apt-add-repository ppa:fish-shell/release-2
+sudo apt-get update
+sudo apt-get install fish
+
+# Make Fish your default shell:
+chsh -s /usr/bin/fish
+```
+
 Install Oh-My-Fish
 
 ```
