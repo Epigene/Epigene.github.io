@@ -148,8 +148,10 @@ Here's a key symbol [reference](http://wiki.linuxquestions.org/wiki/List_of_Keys
 # 1. run `xev` command and get keycodes and event names for Delete, grave, tilde (and some possible Alt-symbols)
 
 # 2. run `xmodmap` to change tilde to del and del to tilde
-xmodmap -e "keycode 119 = Delete Delete"
-xmodmap -e "keycode 49 = grave asciitilde"
+# keycode 119 is Delete by default
+# keycode 49 is grave by default
+xmodmap -e "keycode 49 = Delete Delete"
+xmodmap -e "keycode 119 = grave asciitilde"
 ```
 
 ##### Caps to Enter
