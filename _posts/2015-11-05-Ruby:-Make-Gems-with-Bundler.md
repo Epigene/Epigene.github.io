@@ -61,11 +61,21 @@ $ rspec spec/tests/foo_spec.rb
 ### 5. Set git remote using `git remote add origin <url>`
 
 ```
-$ git remote add origin https://github.com/Epigene/gemname.git
+# git@github.com:<username>/<project>.git
+$ git remote add origin git@github.com:Epigene/myblog.git
 ```
 
 ### 6. Get hackin', add ROOT constant for navigation
 
+```rb
+module MyGem
+  extend self
+
+  def root
+    @@root ||= Pathname.new(Gem::Specification.find_by_name("my_gem").gem_dir)
+  end
+end
+```
 
 ### 7. Once everything is TDDed, bump the version and `rake relase`
 
