@@ -162,17 +162,15 @@ xmodmap -e "keycode 66 = Return" -e 'clear Lock'
 
 #### Persist changes over boots
 Sourcing the ~/.Xmodmap file is a known hassle.  
-Perhaps the least problematic way is to define an alias and have it execute on terminal launch.  
+The working solution on ubuntu is to `touch ~/.xsessionrc` and populate it with:
 
 ```
-# 1. run keymap export command after making changes
-xmodmap -pke > ~/.Xmodmap
-
-# 2. (probably will not work) make a init file which will source the file
-touch ~/.xinitrc
-  xmodmap ~/.Xmodmap
-
-# 3. You may need to trigger the lock removal on every boot, boot level override (via Upstart) works poorly, just place it in fish config.
+xmodmap -e "keycode 49 = Delete Delete"
+xmodmap -e "keycode 119 = grave asciitilde"
+xmodmap -e "keycode 66 = Return Return Return" -e 'clear Lock'
+# sleep 1
+xmodmap -e "remove lock = Caps_Lock"
+xmodmap -e "clear Lock"
 ```
 
 ### RVM
