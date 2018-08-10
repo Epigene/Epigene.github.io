@@ -7,6 +7,7 @@ In this post I will expound on creation of Rails engines - a variant of ruby gem
 Assumptions: Namespaced, RSpec+FactoryBot, Postgres (at least in dev).  
 
 See also [this post](https://www.viget.com/articles/rails-engine-testing-with-rspec-capybara-and-factorygirl/).
+And also a [simple setup writeup](http://www.andrewhavens.com/posts/27/how-to-create-a-new-rails-engine-which-uses-rspec-and-factorygirl-for-testing/).
 
 ### 1. Init engine project
 
@@ -26,7 +27,7 @@ gem install rails -v 4.2.10
 mkdir ~/code/myengine
 cd ~/code/myengine
 
-# run the opinionated initializer, will use spec/dummy for test app and Postgres database
+# run the opinionated initializer, will use spec/dummy for test app, Postgres database, and a mountable (as in namespaced) engine.
 rails plugin new . --mountable --dummy-path=spec/dummy -T --skip-bundle --database=postgresql
 ```
 
