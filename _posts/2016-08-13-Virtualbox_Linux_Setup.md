@@ -140,6 +140,16 @@ You might also want to remap other keys.
 Start by consulting the [in-depth thread](http://askubuntu.com/questions/254424/how-can-i-change-what-keys-on-my-keyboard-do-how-can-i-create-custom-keyboard/257497#257497).  
 Here's a key symbol [reference](http://wiki.linuxquestions.org/wiki/List_of_Keysyms_Recognised_by_Xmodmap).  
 
+Place the remaps somewhere they will be loaded very late, like fish.conf  
+
+__NB__, remaps, especially Capslock -> Return will break on relogging, just rerun the command.  
+
+```
+xmodmap -e "keycode 49 = Delete Delete"
+xmodmap -e "keycode 119 = grave asciitilde"
+xmodmap -e "keycode 66 = Return Return Return" -e 'clear Lock'
+```
+
 #### Examples
 
 ##### Tilde/grave to Del
@@ -158,19 +168,6 @@ xmodmap -e "keycode 119 = grave asciitilde"
 
 ```
 xmodmap -e "keycode 66 = Return" -e 'clear Lock'
-```
-
-#### Persist changes over boots
-Sourcing the ~/.Xmodmap file is a known hassle.  
-The working solution on ubuntu is to `touch ~/.xsessionrc` and populate it with:
-
-```
-xmodmap -e "keycode 49 = Delete Delete"
-xmodmap -e "keycode 119 = grave asciitilde"
-xmodmap -e "keycode 66 = Return Return Return" -e 'clear Lock'
-# sleep 1
-xmodmap -e "remove lock = Caps_Lock"
-xmodmap -e "clear Lock"
 ```
 
 ### RVM
