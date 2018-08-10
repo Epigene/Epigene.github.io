@@ -4,21 +4,23 @@ title: Make Engines
 ---
 In [previous post]({{ site.baseurl }}/Ruby:-Make-Gems-with-Bundler/) I discuessed ruby gem creation.  
 In this post I will expound on creation of Rails engines - a variant of ruby gem that assumes inclusion in a rails app and, usually, provides functionality through models/controllers.  
-Assumptions: Namespaced, RSpec+FactoryGirl, Postgres (at least in dev).  
+Assumptions: Namespaced, RSpec+FactoryBot, Postgres (at least in dev).  
+
+See also [this post](https://www.viget.com/articles/rails-engine-testing-with-rspec-capybara-and-factorygirl/).
 
 ### 1. Init engine project
 
 ```
 # rvm install ruby-<version>
-rvm install ruby-2.2.3
+rvm install ruby-2.3.7
 
-# rvm use 2.2.3@<gemset> --create
-rvm use 2.2.3@myengine --create
+# rvm use 2.3.7@<gemset> --create
+rvm use 2.3.7@myengine --create
 
 gem install bundler
 
 # gem install rails -v <version>
-gem install rails -v 4.1.0
+gem install rails -v 4.2.10
 
 # make a directory that matches your intended engine name
 mkdir ~/code/myengine
@@ -28,29 +30,26 @@ cd ~/code/myengine
 rails plugin new . --mountable --dummy-path=spec/dummy -T --skip-bundle --database=postgresql
 ```
 
-### 2. Edit myengine.gemspec, add dependencies
+### 2. Edit myengine.gemspec, add dependencies and bundle
 
 ```ruby
-  s.required_ruby_version = '>= 2'
+  s.required_ruby_version = '>= 2.3.7'
+
+  s.test_files = Dir["spec/**/*"]
 
   # ...
 
-  s.add_dependency "rails", "~> 4.1.0"
+  s.add_dependency "rails", "~> 4.2.10"
 
   s.add_development_dependency "rake", "~> 10.5.0"  
-  s.add_development_dependency "pg", ">= 0.18.4"
+  s.add_development_dependency "pg", ">= 0.18.4", "< 1"
 
   s.add_development_dependency "pry"
-  s.add_development_dependency "rspec-rails", "~> 3.4.1"
-  s.add_development_dependency 'factory_girl_rails', "~> 4.7.0"
+  s.add_development_dependency "rspec-rails", "~> 3.8"
+  s.add_development_dependency 'factory_girl_rails', "~> 4.10"
   s.add_development_dependency 'timecop', "~> 0.8.1"
   s.add_development_dependency "spring-commands-rspec", "~> 1.0.4"
 
-```
-
-Bundle!
-```
-bundle
 ```
 
 ### 3. Set up RSpec
