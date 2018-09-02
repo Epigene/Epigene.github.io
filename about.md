@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-Hi, I am a Rails developer at Creative.
+Hi, I am a Rails developer from Latvia.
 
 ### Likes
 
@@ -12,4 +12,4 @@ Hi, I am a Rails developer at Creative.
 
 ### Contact me
 
-[augusts@creative.gs](mailto:augusts@creative.gs)
+[augusts.bautra@gmail.com](mailto:augusts.bautra@gmail.com)
