@@ -212,6 +212,8 @@ ALTER USER <your username> CREATEDB;
 ALTER USER <your username> WITH SUPERUSER;
 \q
 ```
+### MySQL
+See this [DO post](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-14-04)
 
 ### Redis
 
